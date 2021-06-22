@@ -1,7 +1,7 @@
-use dequeue::*;
+use deque::*;
 
 fn main() {
-    let mut d: Dequeue<u32> = Dequeue::new();
+    let mut d: Deque<u32> = Deque::new();
     eprintln!("insert 13");
     d.insert_head(13);
     eprintln!("insert 14");

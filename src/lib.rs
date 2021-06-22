@@ -7,8 +7,8 @@ use std::fmt;
 type FullLink<T> = StaticRc<RefCell<Elt<T>>, 2, 2>;
 type HalfLink<T> = StaticRc<RefCell<Elt<T>>, 1, 2>;
 
-/// A dequeue is an ordered set of items supporting fast insertion and removal at both ends.
-pub struct Dequeue<T>(Option<List<T>>);
+/// A deque is an ordered set of items supporting fast insertion and removal at both ends.
+pub struct Deque<T>(Option<List<T>>);
 
 /// A List is an always-nonempty doubly-linked list of items
 struct List<T> {
@@ -26,7 +26,7 @@ struct Elt<T> {
     next: Option<HalfLink<T>>,
 }
 
-impl<T: fmt::Debug> Dequeue<T> {
+impl<T: fmt::Debug> Deque<T> {
     pub fn new() -> Self {
         Self(None)
     }
@@ -52,9 +52,9 @@ impl<T: fmt::Debug> Dequeue<T> {
     }
 }
 
-impl<T: fmt::Debug> fmt::Debug for Dequeue<T> {
+impl<T: fmt::Debug> fmt::Debug for Deque<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_tuple("Dequeue").field(&self.0).finish()
+        f.debug_tuple("Deque").field(&self.0).finish()
     }
 }
 
@@ -169,7 +169,7 @@ impl<T: fmt::Debug> List<T> {
 
 #[test]
 fn push_one_head_and_pop() {
-    let mut d: Dequeue<u32> = Dequeue::new();
+    let mut d: Deque<u32> = Deque::new();
     d.insert_head(13);
     assert_eq!(d.pop_head(), Some(13));
     assert_eq!(d.pop_head(), None);
